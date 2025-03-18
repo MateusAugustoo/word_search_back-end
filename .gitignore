@@ -1,0 +1,7 @@
+# Qodo
+.qodo
+
+node_modules
+bun.lock
+
+.env
