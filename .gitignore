@@ -6,3 +6,6 @@ bun.lock
 
 .env
 config/*
+
+src/drizzle/db
+src/drizzle/migrations
