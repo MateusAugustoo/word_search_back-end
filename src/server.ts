@@ -8,9 +8,7 @@ import {
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
 import fastifyCors from "@fastify/cors";
-import { z } from "zod";
 import { env } from "./env";
-import { helloRoute } from "./routes/hello-route-api";
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 
@@ -36,7 +34,6 @@ app.register(fastifySwaggerUi, {
   routePrefix: "/docs",
 });
 
-app.register(helloRoute)
 
 app
   .listen({ port: env.PORT })
