@@ -2,8 +2,8 @@ import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
 
 export const user = sqliteTable('users', {
   id: text('id').primaryKey(),
-  name: text('name'),
-  username: text('username').unique().notNull()
+  name: text('name').notNull(),
+  username: text('username').unique()
 })
 
 export const wordSearches = sqliteTable('word_searches', {
