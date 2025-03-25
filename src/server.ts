@@ -10,6 +10,7 @@ import { fastifySwaggerUi } from "@fastify/swagger-ui";
 import fastifyCors from "@fastify/cors";
 import { env } from "./env";
 import { generateWordsRoutes } from "./routes/generate-words-ia-routes";
+import { userRoutes } from "./routes/user.routes";
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 
@@ -35,7 +36,8 @@ app.register(fastifySwaggerUi, {
   routePrefix: "/docs",
 });
 
-app.register(generateWordsRoutes)
+app.register(userRoutes);
+app.register(generateWordsRoutes);
 
 app
   .listen({ port: env.PORT })
