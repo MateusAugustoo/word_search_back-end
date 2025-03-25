@@ -1,21 +1,27 @@
 import axios from "axios";
-import { env } from '../env'
+import { env } from "../env";
 
 interface generateWordsProps {
-  length: string;
-  theme: string
+  language: string;
+  length: number;
+  theme: string;
 }
 
-export const generateWords = async ({ length, theme }: generateWordsProps) => {
-  const { response } = await axios.post(env.URL_API_LLAMA, {
-    prompt: `Liste ${length} palavras relacionadas a ${theme}, separadas por virgula. Nada mais.`,
-    model: 'llama3:latest',
-    stream: false
-  })
+export const generateWords = async ({
+  length,
+  theme,
+  language,
+}: generateWordsProps) => {
+  const { data } = await axios.post(env.API_URL_LLAMA, {
+    prompt: `Liste ${length} palavras relacionadas a ${theme},
+      separadas por virgula e as palavras devem ser em ${language}. Nada mais.`,
+    model: "llama3:latest",
+    stream: false,
+  });
 
-  const words = response.split(',')
+  const words = data.response.split(",");
 
   return {
-    words
-  }
-}
+    words,
+  };
+};
