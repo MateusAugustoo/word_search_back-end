@@ -1,1 +1,8 @@
-GET http://localhost:3334/hello
+POST http://localhost:3334/generate/words-search-ia
+Content-Type: application/json
+
+{
+  "language": "pt-br",
+  "length": 5,
+  "theme": "animals"
+}
