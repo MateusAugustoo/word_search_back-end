@@ -7,7 +7,7 @@ export const generateWordsRoutes: FastifyPluginAsyncZod = async (app) => {
     "/generate/words-search-ia",
     {
       schema: {
-        tags: ["generate-words"],
+        tags: ["Generate-words"],
         description: `Generate words by search IA`,
         body: z.object({
           language: z.string(),

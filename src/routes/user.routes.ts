@@ -7,7 +7,7 @@ export const userRoutes: FastifyPluginAsyncZod = async (app) => {
     "/user",
     {
       schema: {
-        tags: ["user"],
+        tags: ["User"],
         description: `Creating a new user... 
           the user registration will be via Firebase,
           but we will save some data in the SQL database,
