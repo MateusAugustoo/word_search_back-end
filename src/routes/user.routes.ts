@@ -4,7 +4,7 @@ import { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 
 export const userRoutes: FastifyPluginAsyncZod = async (app) => {
   app.post(
-    "/user",
+    "/api/user",
     {
       schema: {
         tags: ["User"],

@@ -4,7 +4,7 @@ import { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 
 export const generateWordsRoutes: FastifyPluginAsyncZod = async (app) => {
   app.post(
-    "/generate/words-search-ia",
+    "/api/generate/words-search-ia",
     {
       schema: {
         tags: ["Generate-words"],
