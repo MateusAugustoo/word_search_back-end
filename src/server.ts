@@ -1,4 +1,7 @@
+import { env } from "./env";
 import { fastify } from "fastify";
+import fastifyCors from "@fastify/cors";
+import { userRoutes } from "./routes/user.routes";
 import {
   validatorCompiler,
   serializerCompiler,
@@ -7,10 +10,8 @@ import {
 } from "fastify-type-provider-zod";
 import { fastifySwagger } from "@fastify/swagger";
 import { fastifySwaggerUi } from "@fastify/swagger-ui";
-import fastifyCors from "@fastify/cors";
-import { env } from "./env";
-import { generateWordsRoutes } from "./routes/generate-words-ia-routes";
-import { userRoutes } from "./routes/user.routes";
+import { generateWordsIARoutes } from "./routes/generate-words-ia-routes";
+import { generateWordSearchRoutes } from "./routes/generate-word-search-routes";
 
 const app = fastify({ logger: true }).withTypeProvider<ZodTypeProvider>();
 
@@ -37,7 +38,8 @@ app.register(fastifySwaggerUi, {
 });
 
 app.register(userRoutes);
-app.register(generateWordsRoutes);
+app.register(generateWordSearchRoutes);
+app.register(generateWordsIARoutes);
 
 app
   .listen({ port: env.PORT })
