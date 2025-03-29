@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { wordsSearchFunctions } from "../functions/words-search-functions";
 import { generateWordSearch } from "../functions/generate-words-search";
 import { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 
@@ -12,6 +13,8 @@ export const generateWordSearchRoutes: FastifyPluginAsyncZod = async (app) => {
         where the request must pass the following data,
         the list of words, size of the search and the difficulty`,
         body: z.object({
+          userId: z.string(),
+          title: z.string(),
           words: z.array(z.string()),
           size: z.number(),
           difficulty: z.enum(["easy", "medium", "difficult"]),
@@ -25,13 +28,13 @@ export const generateWordSearchRoutes: FastifyPluginAsyncZod = async (app) => {
             error: z.string(),
           }),
           500: z.object({
-            error: z.string(), 
-          })
+            error: z.string(),
+          }),
         },
       },
     },
     async (request, reply) => {
-      const { words, size, difficulty } = request.body;
+      const { words, size, difficulty, title, userId } = request.body;
 
       if (words.length === 0) {
         reply.code(400).send({ error: "The list of submitted words is empty" });
@@ -69,6 +72,12 @@ export const generateWordSearchRoutes: FastifyPluginAsyncZod = async (app) => {
 
       try {
         const wordSearch = generateWordSearch(words, size, difficulty);
+        await wordsSearchFunctions.register({
+          userId,
+          title,
+          difficulty,
+          words,
+        });
 
         return {
           grid: wordSearch,
