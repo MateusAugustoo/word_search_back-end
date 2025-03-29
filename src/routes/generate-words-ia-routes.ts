@@ -2,7 +2,7 @@ import { z } from "zod";
 import { generateWords } from "../functions/generate-words-ia";
 import { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 
-export const generateWordsRoutes: FastifyPluginAsyncZod = async (app) => {
+export const generateWordsIARoutes: FastifyPluginAsyncZod = async (app) => {
   app.post(
     "/api/generate/words-search-ia",
     {
