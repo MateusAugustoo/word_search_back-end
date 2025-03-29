@@ -22,27 +22,65 @@ export const generateWordsIARoutes: FastifyPluginAsyncZod = async (app) => {
           400: z.object({
             message: z.string(),
           }),
+          500: z.object({
+            message: z.string(), 
+          })
         },
       },
     },
     async (request, reply) => {
       const { length, theme, language } = request.body;
 
-      const { words } = await generateWords({ length, theme, language });
-
-      if (!words) {
+      if (length <= 0) {
         reply.code(400).send({
-          message: "Error to generate words",
+          message: "Length must be a positive number",
         });
         return;
       }
 
-      const response = {
-        message: "Words generated successfully",
-        words,
-      };
+      if (length > 20) {
+        reply.code(400).send({
+          message: "Length cannot exceed 20 words",
+        });
+        return;
+      }
 
-      reply.code(200).send(response);
+      if (!theme || theme.trim() === "") {
+        reply.code(400).send({
+          message: "Theme cannot be empty",
+        });
+        return;
+      }
+
+      if (!language || language.trim() === "") {
+        reply.code(400).send({
+          message: "Language cannot be empty",
+        });
+        return;
+      }
+
+      try {
+        const { words } = await generateWords({ length, theme, language });
+
+        if (!words || words.length === 0) {
+          reply.code(400).send({
+            message: "Failed to generate words",
+          });
+          return;
+        }
+
+        const response = {
+          message: "Words generated successfully",
+          words,
+        };
+
+        reply.code(200).send(response);
+      } catch (error) {
+        console.error("Error generating words:", error);
+        reply.code(500).send({
+          message: "Internal server error while generating words",
+        });
+      }
     }
   );
 };
