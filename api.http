@@ -1,8 +1,19 @@
-POST http://localhost:3334/generate/words-search-ia
+POST http://localhost:3334/api/generate/words-search-ia
 Content-Type: application/json
 
 {
   "language": "pt-br",
   "length": 5,
   "theme": "animals"
+}
+
+###
+
+POST http://localhost:3334/api/generate-word-search
+Content-Type: application/json
+
+{
+  "words": ["dog", "cat", "bird", "fish"],
+  "size": 5,
+  "difficulty": "easy"
 }
