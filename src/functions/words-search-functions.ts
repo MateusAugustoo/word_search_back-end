@@ -34,6 +34,34 @@ export const wordsSearchFunctions = {
       .from(wordSearches)
       .where(eq(wordSearches.user_id, userId));
 
-      return searches;
+    return searches;
+  },
+
+  async getCountByUserId(userId: string) {
+    const searches = await db
+      .select()
+      .from(wordSearches)
+      .where(eq(wordSearches.user_id, userId))
+
+    return {
+      total: searches.length
+    }
+  },
+
+  async deleteById(id: string) {
+    const selectedWordSearch = await db
+      .select()
+      .from(wordSearches)
+      .where(eq(wordSearches.id, id));
+
+    if (selectedWordSearch.length === 0) {
+      throw new Error("Word search not found");
+    }
+
+    await db.delete(wordSearches).where(eq(wordSearches.id, id));
+
+    return {
+      selectedWordSearch,
+    };
   },
 };
