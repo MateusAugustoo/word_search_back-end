@@ -34,16 +34,8 @@ export const wordsSearchFunctions = {
       .from(wordSearches)
       .where(eq(wordSearches.user_id, userId));
 
-    return searches;
-  },
-
-  async getCountByUserId(userId: string) {
-    const searches = await db
-      .select()
-      .from(wordSearches)
-      .where(eq(wordSearches.user_id, userId))
-
     return {
+      searches,
       total: searches.length
     }
   },
