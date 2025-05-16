@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { wordsSearchFunctions } from "../functions/words-search-functions";
 import { generateWordSearch } from "../functions/generate-words-search";
-import { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
+import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 
 export const generateWordSearchRoutes: FastifyPluginAsyncZod = async (app) => {
   app.post(

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { wordsSearchFunctions } from "../functions/words-search-functions";
-import { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
+import type { FastifyPluginAsyncZod } from "fastify-type-provider-zod";
 import { authMiddleware } from "../middlewares/authTokenUser";
 
 export const wordsSearchRoutes: FastifyPluginAsyncZod = async (app) => {

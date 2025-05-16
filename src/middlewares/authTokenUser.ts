@@ -1,5 +1,5 @@
 import { auth } from "../firebase";
-import { type FastifyRequest, type FastifyReply } from "fastify";
+import type { FastifyRequest, FastifyReply } from "fastify";
 
 export const authMiddleware = async (
   req: FastifyRequest,
